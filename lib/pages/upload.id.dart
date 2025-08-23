@@ -187,7 +187,7 @@ class _UploadIDPageState extends State<UploadIDPage> {
                   clipBehavior: Clip.none,
                   children: [
                     Container(
-                      height: 200,
+                      height: 300,
                       width: width(context, 1),
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -203,7 +203,7 @@ class _UploadIDPageState extends State<UploadIDPage> {
                       ),
                     ),
                     Positioned(
-                      bottom: 145,
+                      bottom: 10,
                       right: 0,
                       left: 300,
                       child: Center(
@@ -247,7 +247,7 @@ class _UploadIDPageState extends State<UploadIDPage> {
                   clipBehavior: Clip.none,
                   children: [
                     Container(
-                      height: 200,
+                      height: 300,
                       width: width(context, 1),
 
                       decoration: BoxDecoration(
@@ -265,7 +265,7 @@ class _UploadIDPageState extends State<UploadIDPage> {
                       ),
                     ),
                     Positioned(
-                      bottom: 145,
+                      bottom: 10,
                       right: 0,
                       left: 300,
                       child: Center(
@@ -303,7 +303,7 @@ class _UploadIDPageState extends State<UploadIDPage> {
                     ),
                   ],
                 ),
-              SizedBox(height: 150),
+              SizedBox(height: 100),
 
               (_image != null)
                   ? (isLoading

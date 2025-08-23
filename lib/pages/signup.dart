@@ -68,41 +68,20 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  // Future<void> register(BuildContext context) async {
-  //   setState(() {
-  //     isLoading = true;
-  //   });
+  @override
+  void initState() {
+    prenom.addListener(() {
+      username.text = generateUsername(prenom.text);
+    });
+    super.initState();
+  }
 
-  //   final session = await postData("api/auth/register/", {
-  //     'username': username.text,
-  //     'password': password.text,
-  //     'nom': nom.text,
-  //     'prenom': prenom.text,
-  //     'email': email.text,
-  //     'phone': phone.text,
-  //     'date_naissance': dateNaissance.text,
-  //     'lieu_naissance': lieuNaissance.text,
-  //     'address': address.text,
-  //     'photo_identite': null,
-  //     'piece_identite': null,
-  //     'profile': null,
-  //   });
-
-  //   setState(() {
-  //     isLoading = false;
-  //   });
-
-  //   if (session != null && session['token'] != null) {
-  //     saveSession(session);
-  //     navigatePage(
-  //       context,
-  //       UploadProfilePage(destination: UploadIDPage(destination: HomePage())),
-  //     );
-  //     messageInfo(context, "Compte crée...");
-  //   } else {
-  //     messageInfo(context, 'Erreur lors de l’enregistrement');
-  //   }
-  // }
+  @override
+  void dispose() {
+    prenom.dispose();
+    username.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +111,13 @@ class _RegisterPageState extends State<RegisterPage> {
             SizedBox(height: 20),
             inputZone(nom, 'Nom'),
             inputZone(prenom, 'Prénom'),
-            inputZone(username, "Nom d'utilisateur"),
+            const SizedBox(height: 20),
+            Text(
+              "Champs trés important",
+              style: TextStyle(fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 10),
+            inputZone(username, "Pseudonyme (à utiliser pour la connexion)"),
             inputZonePwd(password, 'Mot de passe'),
             const SizedBox(height: 20),
             inputDatePickerZone(context, dateNaissance, 'Date de naissance'),

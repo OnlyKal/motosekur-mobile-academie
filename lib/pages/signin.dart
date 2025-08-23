@@ -104,7 +104,10 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     SizedBox(height: 30),
-                    inputZone(usernameController, 'Nom d’utilisateur'),
+                    inputZone(
+                      usernameController,
+                      'Pseudonyme (à utiliser pour la connexion)',
+                    ),
                     inputZonePwd(passwordController, 'Mot de passe'),
                     SizedBox(height: 25),
                     isLoading
@@ -130,11 +133,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                width: heigth(context, 1),
-                height: heigth(context, 0.4),
-                child: Image.asset("assets/images/home.gif", fit: BoxFit.cover),
               ),
             ],
           ),

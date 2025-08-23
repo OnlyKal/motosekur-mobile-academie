@@ -257,13 +257,12 @@ Future<Map<String, dynamic>?> getMotoData() async {
 Future<List> verificationPaiment(context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? matricule = prefs.getString("matricule");
-  if (matricule == null || matricule.isEmpty) {
-    stopAskfoPayment(context);
-    return [];
-  }
+  if (matricule == null || matricule.isEmpty) {}
   var data = await getData("api/payment/get/$matricule/");
   if (data == null || data.isEmpty) {
-    stopAskfoPayment(context);
+    if (matricule != null || matricule!.isNotEmpty) {
+      stopAskfoPayment(context);
+    }
     return [];
   }
   return data;
@@ -349,4 +348,12 @@ currentP() async {
     orElse: () => null,
   );
   return currentPrice;
+}
+
+String generateUsername(String lastName) {
+  final random = Random();
+  final base = lastName.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+  final shortBase = base.length > 6 ? base.substring(0, 6) : base;
+  final suffix = random.nextInt(90) + 10;
+  return '$shortBase$suffix';
 }

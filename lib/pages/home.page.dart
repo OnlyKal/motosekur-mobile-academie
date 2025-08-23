@@ -366,35 +366,7 @@ class _HomePageState extends State<HomePage> {
               trailing: Icon(CupertinoIcons.forward),
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 216, 237, 255),
-              border: Border(
-                bottom: BorderSide(
-                  width: 2,
-                  color: const Color.fromARGB(255, 130, 201, 245),
-                ),
-              ),
-            ),
-            child: ListTile(
-              onTap: getUserMoto,
-              title: Text(
-                "Modules de formation",
-                style: TextStyle(fontWeight: FontWeight.w500),
-              ),
-              subtitle: Text(
-                "Accédez à toutes les vidéos de formation.",
-                style: TextStyle(fontSize: 12),
-              ),
-              leading: Icon(
-                CupertinoIcons.rectangle_stack_person_crop,
-                color: const Color.fromARGB(255, 12, 162, 255),
-              ),
-              trailing: Icon(CupertinoIcons.forward),
-            ),
-          ),
-
-          // const SizedBox(height: 80),
+         
         ],
       ),
     );

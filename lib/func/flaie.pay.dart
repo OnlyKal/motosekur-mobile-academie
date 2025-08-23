@@ -60,7 +60,7 @@ class FlexPaie {
       Uri.parse(urlPaiement),
       headers: {'Content-Type': 'application/json', 'Authorization': tokenApi},
       body: jsonEncode({
-        "merchant": "NEPAA",
+        "merchant": "NEPA_RDC",
         "type": "1",
         "phone": phone,
         "reference": reference,

@@ -22,7 +22,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.motosekur.app"
+    namespace = "com.motosekur.app1"
     compileSdk = 35
     ndkVersion = "27.0.12077973"
 
@@ -36,11 +36,11 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.motosekur.app"
+        applicationId = "com.motosekur.app1"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 4
+        versionName = "1.4.0"
     }
     signingConfigs {
             create("release") {

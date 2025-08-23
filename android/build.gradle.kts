@@ -34,7 +34,7 @@ gradle.projectsEvaluated {
             val androidExtension = extensions.findByName("android")
             if (androidExtension is com.android.build.gradle.LibraryExtension) {
                 if (androidExtension.namespace.isNullOrBlank()) {
-                    val newNamespace = "com.motosekur.app"
+                    val newNamespace = "com.motosekur.app1"
                     println("Adding missing namespace '$newNamespace' to ${project.name}")
                     androidExtension.namespace = newNamespace
                 }

@@ -1,4 +1,4 @@
-package com.motosekur.app
+package com.motosekur.app1
 
 import io.flutter.embedding.android.FlutterActivity
 
