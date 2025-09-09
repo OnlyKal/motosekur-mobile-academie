@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 // const String apiBase = 'http://localhost:8000/';
+// const String apiBase = 'http://172.20.10.6:8000/';
 const String apiBase = 'https://api.motosekur.online/';
 
 Future postData(String endpoint, Map<String, dynamic> body) async {

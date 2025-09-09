@@ -39,8 +39,8 @@ android {
         applicationId = "com.motosekur.app1"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        versionCode = 4
-        versionName = "1.4.0"
+        versionCode = 8
+        versionName = "1.8.0"
     }
     signingConfigs {
             create("release") {

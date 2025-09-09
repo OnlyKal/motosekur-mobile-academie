@@ -10,3 +10,5 @@ export '../pages/image.view.dart';
 export '../pages/add.moto.dart';
 export '../pages/my.payment.dart';
 export '../pages/payement.dart';
+export '../pages/formation.dart';
+export '../pages/video.dart';

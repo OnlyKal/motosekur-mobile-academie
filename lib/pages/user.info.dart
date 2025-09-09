@@ -133,7 +133,7 @@ class _UserInfosPageState extends State<UserInfosPage> {
                     final prefs = await SharedPreferences.getInstance();
                     if (formKey.currentState!.validate()) {
                       final response =
-                          await patchData("api/auth/motards/$userId/update/", {
+                          await patchData("api/auth/moto/$userId/update/", {
                             "nom": nomController.text,
                             "prenom": prenomController.text,
                             "username": usernameController.text,

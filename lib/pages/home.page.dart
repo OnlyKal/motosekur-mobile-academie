@@ -366,7 +366,33 @@ class _HomePageState extends State<HomePage> {
               trailing: Icon(CupertinoIcons.forward),
             ),
           ),
-         
+          Container(
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 216, 237, 255),
+              border: Border(
+                bottom: BorderSide(
+                  width: 2,
+                  color: const Color.fromARGB(255, 154, 207, 241),
+                ),
+              ),
+            ),
+            child: ListTile(
+              onTap: ()=>navigatePage(context, Formations()),
+              title: Text(
+                "Vidéos de formation",
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
+              subtitle: Text(
+                "Visualiser les vidéos de la formation",
+                style: TextStyle(fontSize: 12),
+              ),
+              leading: Icon(
+                CupertinoIcons.videocam,
+                color: const Color.fromARGB(255, 12, 162, 255),
+              ),
+              trailing: Icon(CupertinoIcons.forward),
+            ),
+          ),
         ],
       ),
     );

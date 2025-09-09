@@ -34,7 +34,7 @@ class _MotoPageState extends State<MotoPage> {
     });
 
     try {
-      final data = await getData("api/moto/my/");
+      final data = await getData("api/auth/moto/my/");
       setState(() {
         motos = data;
         isLoading = false;
@@ -48,7 +48,7 @@ class _MotoPageState extends State<MotoPage> {
   }
 
   Future<void> deleteMoto(int id) async {
-    final result = await deleteData("api/moto/remove/$id/");
+    final result = await deleteData("api/auth/moto/remove/$id/");
     if (result != null) {
       setState(() {
         motos.removeWhere((moto) => moto['id'] == id);
@@ -58,13 +58,13 @@ class _MotoPageState extends State<MotoPage> {
 
   Future<void> editImage(int id, String base64Image) async {
     final response = await http.patch(
-      Uri.parse("http://localhost:8000/api/moto/upload/$id/"),
+      Uri.parse("$apiBase/api/auth/moto/upload/$id/"),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({"image": base64Image}),
     );
     if (response.statusCode == 200) {
       debugPrint("Image mise à jour avec succès.");
-      await loadMotos(); // Recharge la liste après mise à jour
+      await loadMotos(); 
     } else {
       debugPrint("Échec de la mise à jour de l'image.");
     }
@@ -116,7 +116,7 @@ class _MotoPageState extends State<MotoPage> {
     final base64Image = base64Encode(bytes);
     final fileExtension = _image!.path.split('.').last;
     try {
-      await patchData("api/moto/upload/${motos[0]['id']}/", {
+      await patchData("api/auth/moto/upload/${motos[0]['id']}/", {
         "image": "data:image/$fileExtension;base64,$base64Image",
       });
       loadMotos();
@@ -396,7 +396,7 @@ class _MotoPageState extends State<MotoPage> {
                             isloading = true;
                           });
 
-                          final moto = await postData("api/moto/add/", {
+                          final moto = await postData("api/auth/moto/add/", {
                             "owner": ownerId,
                             "image": null,
                             "brand": brandController.text,

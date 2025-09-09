@@ -220,8 +220,7 @@ clearSession(ctx) async {
 
 Future<bool> requestPermissions() async {
   var cameraStatus = await Permission.camera.request();
-  var galleryStatus = await Permission.photos
-      .request(); // or Permission.storage for Android
+  var galleryStatus = await Permission.photos.request();
   if (cameraStatus.isGranted && galleryStatus.isGranted) {
     return true;
   } else {
@@ -258,13 +257,15 @@ Future<List> verificationPaiment(context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? matricule = prefs.getString("matricule");
   if (matricule == null || matricule.isEmpty) {}
-  var data = await getData("api/payment/get/$matricule/");
+  var data = await getData("api/auth/p/$matricule/");
+
   if (data == null || data.isEmpty) {
     if (matricule != null || matricule!.isNotEmpty) {
       stopAskfoPayment(context);
     }
     return [];
   }
+  print(data);
   return data;
 }
 
@@ -279,49 +280,55 @@ void stopAskfoPayment(BuildContext context) {
     isScrollControlled: true,
     backgroundColor: Colors.white,
     builder: (context) {
-      return SizedBox(
-        height: heigth(context, 0.7),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Center(
-                    child: Container(
-                      width: 60,
-                      height: 5,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(10),
+      return PopScope(
+        canPop: false,
+        child: SizedBox(
+          height: heigth(context, 0.7),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Center(
+                      child: Container(
+                        width: 60,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    "ALERTE PAIEMENT",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    "Nous n’avons trouvé aucun paiement associé à votre compte. Par conséquent, certaines fonctionnalités sont actuellement restreintes.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  SizedBox(height: 10),
-                  Image.asset("assets/images/Paid idea.gif", height: 200),
-                ],
-              ),
-              btn(
-                context,
-                () => navigatePage(context, PaymentPage()),
-                "EFFECTUER LA TRANSACTION",
-              ),
-              SizedBox(height: 5),
-            ],
+                    SizedBox(height: 20),
+                    Text(
+                      "ALERTE PAIEMENT",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Nous n’avons trouvé aucun paiement associé à votre compte. Par conséquent, certaines fonctionnalités sont actuellement restreintes.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    SizedBox(height: 10),
+                    Image.asset("assets/images/Paid idea.gif", height: 200),
+                  ],
+                ),
+                btn(
+                  context,
+                  () => navigatePage(context, PaymentPage()),
+                  "EFFECTUER LA TRANSACTION",
+                ),
+                SizedBox(height: 5),
+              ],
+            ),
           ),
         ),
       );
@@ -342,7 +349,7 @@ String generateID(isTrans) {
 }
 
 currentP() async {
-  var priceList = await getData("api/payment/price/");
+  var priceList = await getData("api/auth/get-price/");
   var currentPrice = priceList.firstWhere(
     (price) => price['actif'] == true,
     orElse: () => null,

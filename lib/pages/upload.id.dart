@@ -224,8 +224,7 @@ class _UploadIDPageState extends State<UploadIDPage> {
                             padding: EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors
-                                  .black, // ou la couleur de fond que tu veux
+                              color: Colors.black,
                               border: Border.all(color: Colors.white, width: 1),
                             ),
                             child: GestureDetector(

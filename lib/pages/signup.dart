@@ -91,16 +91,9 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           children: [
             SizedBox(height: 80),
-            Image.asset("assets/images/logo.png", height: 50),
+            Image.asset("assets/images/logo.png", height: 90),
             SizedBox(height: 5),
-            Text(
-              "MOTOSEKUR",
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.w800,
-                letterSpacing: -2,
-              ),
-            ),
+
             Text(
               "Bienvenue, connectez-vous pour continuer",
               style: TextStyle(

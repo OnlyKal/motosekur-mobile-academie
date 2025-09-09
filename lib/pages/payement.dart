@@ -1,15 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:motosekur_academia/func/flaie.pay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../func/export.dart';
 
 class PaymentPage extends StatefulWidget {
-  const PaymentPage({Key? key}) : super(key: key);
+  const PaymentPage({super.key});
 
   @override
   State<PaymentPage> createState() => _PaymentPageState();
@@ -19,7 +17,7 @@ class _PaymentPageState extends State<PaymentPage> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController phoneCtrl = TextEditingController();
-  bool isUsd = true;
+  bool isUsd = false;
   Timer? paymentTimer;
   bool isLoading = false;
 
@@ -37,80 +35,6 @@ class _PaymentPageState extends State<PaymentPage> {
     }
     return null;
   }
-
-  // Future<void> payementFlex() async {
-  //   final user = await getInfos();
-  //   final price = await currentP();
-  //   const String urlPaiement =
-  //       "https://backend.flexpay.cd/api/rest/v1/paymentService";
-  //   setState(() => isLoading = true);
-  //   final response = await http.post(
-  //     Uri.parse(urlPaiement),
-  //     headers: {'Content-Type': 'application/json', 'Authorization': tokenApi},
-  //     body: jsonEncode({
-  //       "merchant": "NEPAA",
-  //       "type": "1",
-  //       "phone": "243${phonCtrl.text}",
-  //       "reference": "${generateID(true)}-${user['matricule']}",
-  //       "amount": price['montant'],
-  //       "currency": isUsd ? "USD" : "CDF",
-  //       "callbackUrl": "https://abcd.efgh.cd",
-  //     }),
-  //   );
-
-  //   final data = json.decode(response.body);
-
-  //   if (data['code'] == "0") {
-  //     int attemptCount = 0;
-  //     const int maxAttempts = 10;
-  //     paymentTimer = Timer.periodic(Duration(seconds: 4), (timer) async {
-  //       attemptCount++;
-  //       final result = await checkPaymentBilling(data['orderNumber']);
-  //       if (result) {
-  //         timer.cancel();
-  //       } else if (attemptCount >= maxAttempts) {
-  //         timer.cancel();
-  //         setState(() => isLoading = false);
-  //         messageInfo(
-  //           context,
-  //           "Paiement non confirmé après plusieurs tentatives.",
-  //         );
-  //       }
-  //     });
-  //   } else {
-  //     messageInfo(context, "Erreur lors de l'initiation du paiement.");
-  //   }
-  // }
-
-  // Future<bool> checkPaymentBilling(String orderNumber) async {
-  //   try {
-  //     final response = await http.get(
-  //       Uri.parse('https://backend.flexpay.cd/api/rest/v1/check/$orderNumber'),
-  //       headers: {
-  //         'Content-Type': 'application/json; charset=UTF-8',
-  //         'Authorization': tokenApi,
-  //       },
-  //     );
-
-  //     final data = json.decode(response.body);
-
-  //     if (data['code'] == "0") {
-  //       final status = data['transaction']['status'];
-  //       if (status == "0") {
-  //         await saveLocalPayment();
-  //         messageInfo(context, "Paiement confirmé !");
-  //         return true;
-  //       } else if (status == "1") {
-  //         messageInfo(context, "La transaction a échoué.");
-  //         setState(() => isLoading = false);
-  //         return true;
-  //       }
-  //     }
-  //   } catch (e) {
-  //     print("Erreur dans checkPaymentBilling: $e");
-  //   }
-  //   return false;
-  // }
 
   Future<void> startPayment() async {
     final userMap = await getInfos();
@@ -131,7 +55,7 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   Future<void> saveLocalPayment(Map user, dynamic price) async {
-    final response = await postData("api/payment/verification/", {
+    final response = await postData("api/auth/p/verification/", {
       "owner": user['id'],
       "transaction_id": generateID(true),
       "payment_status": "success",
